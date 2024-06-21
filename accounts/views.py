@@ -109,7 +109,7 @@ class CustomTokenRefreshView(TokenRefreshView):
                 path=settings.AUTH_COOKIE_PATH,
                 secure=settings.AUTH_COOKIE_SECURE,
                 httponly=settings.AUTH_COOKIE_HTTP_ONLY,
-                samesite=settings.AUTH_COOKIE_SAMESITE
+                samesite=settings.AUTH_COOKIE_SAMESITE,
             )
 
         return response

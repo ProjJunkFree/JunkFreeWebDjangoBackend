@@ -13,6 +13,7 @@ from os import getenv, path
 from pathlib import Path
 import dotenv 
 from django.core.management.utils import get_random_secret_key
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,10 +34,11 @@ SECRET_KEY = getenv('DJANGO_SECRET_KEY', get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = getenv('DEBUG', 'False') == 'True'
+DEVELOPMENT_MODE = getenv('DEVELOPMENT_MODE', 'False') == 'True'
 
 
 # ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',') MALI NI LITSE
-ALLOWED_HOSTS = ['192.168.230.167', 'localhost', '192.168.216.167']
+ALLOWED_HOSTS = ['localhost', '192.168.254.111']
 
 """
 Para mo run ang animal dapat ang pag mag runserver is naka point sa ipv4 address then port
@@ -56,10 +58,13 @@ INSTALLED_APPS = [
     'djoser',
     'corsheaders',
     'anymail',
-    'social_django', # for google auth and other    
+    'rest_framework_simplejwt',
+    'social_django', # for google auth and other    DEFAULT_AUTHENTICATION_CLASSES
     'accounts', # Handling Authentication 
     'listings', # JunkFree Main Feature
 ]
+
+
 
 # Email Settings
 EMAIL_BACKEND = 'anymail.backends.brevo.EmailBackend'
@@ -120,6 +125,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+DATABASES ['default'] = dj_database_url.parse('postgresql://junkfree_db_user:KZN6acuywaTj8FSFcEH45DMeW7w3P92r@dpg-cpqo3haj1k6c73bkemcg-a.oregon-postgres.render.com/junkfree_db')
 
 
 # Password validation
@@ -176,7 +182,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.profile',
     'openid',
 ]
-SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = [ 'first_name', 'last_name', 'picture']
+SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = [ 'first_name', 'last_name']
 # FACEBOOK AUTH
 SOCIAL_AUTH_FACEBOOK_KEY = getenv('FACEBOOK_AUTH_KEY')
 SOCIAL_AUTH_FACEBOOK_SECRET = getenv('FACEBOOK_AUTH_SECRET_KEY')
@@ -233,14 +239,11 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'TOKEN_MODEL': None,
     'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': getenv('REDIRECT_URLS').split(',') # Social Auth
-    
 }
 
 AUTH_COOKIE = 'access'
-AUTH_COOKIE_MAX_AGE = 60 * 5
-# AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 5
-# AUTH_COOKIE_REFRESH_MAX_AGE = 60 * 60 * 24
-AUTH_COOKIE_SECURE = getenv('AUTH_COOKIE_SECURE', 'True') == 'True'
+AUTH_COOKIE_MAX_AGE = 60 * 60 * 24
+AUTH_COOKIE_SECURE = False
 AUTH_COOKIE_HTTP_ONLY = True
 AUTH_COOKIE_PATH = "/"
 AUTH_COOKIE_SAMESITE = 'None'
@@ -249,7 +252,7 @@ AUTH_COOKIE_SAMESITE = 'None'
 
 
 CORS_ALLOWED_ORIGINS = [
-    'http://192.168.234.1:3000',
+    'http://localhost:3000',
 ]
 
 

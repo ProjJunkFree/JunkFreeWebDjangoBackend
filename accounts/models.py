@@ -8,8 +8,6 @@ from django.conf import settings
  
 
 
-
-
 class UserAccountManager(BaseUserManager):
     def create_user(self, email, password=None, **kwargs):
         """ **kwargs meaning kay keyword arguments
