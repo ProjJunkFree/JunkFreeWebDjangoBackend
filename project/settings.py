@@ -44,7 +44,7 @@ DEVELOPMENT_MODE = os.environ.get('DEVELOPMENT_MODE', 'False') == 'True'
 
 
 # ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',') MALI NI LITSE
-ALLOWED_HOSTS = ['localhost', '192.168.254.111']
+ALLOWED_HOSTS = ['localhost', '192.168.254.111', 'junkfree-backend.onrender.com']
 # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOST").split(" ") 
 
 """
