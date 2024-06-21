@@ -75,7 +75,7 @@ class UserItemList(APIView):
 
     def get(self, request):
         items = Item.objects.filter(user=request.user)
-        serializer = ItemSerializer(items, many=True, context={'request': request})  # Add context here
+        serializer = ItemSerializer(items, many=True, context={'request': request})  
         return Response(serializer.data)
 
     def delete(self, request, pk):

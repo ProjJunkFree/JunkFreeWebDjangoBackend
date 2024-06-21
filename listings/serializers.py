@@ -60,7 +60,7 @@ class ItemSerializer(serializers.ModelSerializer):
 
     user_first_name = serializers.SerializerMethodField()
     user_last_name = serializers.SerializerMethodField()
-    image = serializers.SerializerMethodField()  # Add this line
+    image = serializers.ImageField(use_url=True)  # Use ImageField to include the URL
 
     class Meta:
         model = Item
@@ -71,12 +71,6 @@ class ItemSerializer(serializers.ModelSerializer):
 
     def get_user_last_name(self, obj):
         return obj.user.last_name if obj.user else None
-
-    def get_image(self, obj):  # Add this method
-        request = self.context.get('request')
-        if obj.image and request:
-            return request.build_absolute_uri(obj.image.url)
-        return None
 
     def update(self, instance, validated_data):
         if 'reserved_by' in validated_data:

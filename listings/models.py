@@ -23,6 +23,3 @@ class Item(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     reserved = models.BooleanField(default=False)
     reserved_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reserved_items', null=True, blank=True)
-
-
-    
