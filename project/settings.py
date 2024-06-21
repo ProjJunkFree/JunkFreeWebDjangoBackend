@@ -44,8 +44,8 @@ DEVELOPMENT_MODE = os.environ.get('DEVELOPMENT_MODE', 'False') == 'True'
 
 
 # ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',') MALI NI LITSE
-# ALLOWED_HOSTS = ['localhost', '192.168.254.111']
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOST").split(" ") 
+ALLOWED_HOSTS = ['localhost', '192.168.254.111']
+# ALLOWED_HOSTS = os.environ.get("ALLOWED_HOST").split(" ") 
 
 """
 Para mo run ang animal dapat ang pag mag runserver is naka point sa ipv4 address then port
