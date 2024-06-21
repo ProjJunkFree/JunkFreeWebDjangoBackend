@@ -14,6 +14,7 @@ from pathlib import Path
 import dotenv 
 from django.core.management.utils import get_random_secret_key
 import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,15 +31,21 @@ if path.isfile(dotenv_file):
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = getenv('DJANGO_SECRET_KEY', get_random_secret_key())
+# SECRET_KEY = getenv('DJANGO_SECRET_KEY', get_random_secret_key())
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_random_secret_key())
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = getenv('DEBUG', 'False') == 'True'
-DEVELOPMENT_MODE = getenv('DEVELOPMENT_MODE', 'False') == 'True'
+# DEBUG = getenv('DEBUG', 'False') == 'True'
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+# DEVELOPMENT_MODE = getenv('DEVELOPMENT_MODE', 'False') == 'True'
+DEVELOPMENT_MODE = os.environ.get('DEVELOPMENT_MODE', 'False') == 'True'
+
 
 
 # ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',') MALI NI LITSE
-ALLOWED_HOSTS = ['localhost', '192.168.254.111']
+# ALLOWED_HOSTS = ['localhost', '192.168.254.111']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOST").split(" ") 
 
 """
 Para mo run ang animal dapat ang pag mag runserver is naka point sa ipv4 address then port
@@ -68,19 +75,19 @@ INSTALLED_APPS = [
 
 # Email Settings
 EMAIL_BACKEND = 'anymail.backends.brevo.EmailBackend'
-DEFAULT_FROM_EMAIL = getenv('DEFAULT_FROM_EMAIL')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
 
-EMAIL_HOST =  getenv('EMAIL_HOST')
-EMAIL_PORT = getenv('EMAIL_PORT')
-EMAIL_USE_TLS = getenv('EMAIL_USE_TLS')
-EMAIL_HOST_USER = getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST =  os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
-DOMAIN = getenv('DOMAIN')
+DOMAIN = os.environ.get('DOMAIN')
 SITE_NAME = 'JunkFree Auth'
 ANYMAIL = {
-    'BREVO_API_KEY': getenv('BREVO_API_KEY'),
+    'BREVO_API_KEY': os.environ.get('BREVO_API_KEY'),
 }
 
 
@@ -175,8 +182,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 # GOOGLE OAUTH2
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = getenv('GOOGLE_OAUTH2_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET= getenv('GOOGLE_OAUTH2_SECRET_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET= os.environ.get('GOOGLE_OAUTH2_SECRET_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.email',
     'https://www.googleapis.com/auth/userinfo.profile',
@@ -184,8 +191,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
 ]
 SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = [ 'first_name', 'last_name']
 # FACEBOOK AUTH
-SOCIAL_AUTH_FACEBOOK_KEY = getenv('FACEBOOK_AUTH_KEY')
-SOCIAL_AUTH_FACEBOOK_SECRET = getenv('FACEBOOK_AUTH_SECRET_KEY')
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FACEBOOK_AUTH_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FACEBOOK_AUTH_SECRET_KEY')
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'email, first_name, last_name', 
@@ -238,7 +245,7 @@ DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'TOKEN_MODEL': None,
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': getenv('REDIRECT_URLS').split(',') # Social Auth
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': os.environ.get('REDIRECT_URLS').split(',') # Social Auth
 }
 
 AUTH_COOKIE = 'access'
