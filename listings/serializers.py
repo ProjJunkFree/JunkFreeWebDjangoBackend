@@ -13,6 +13,8 @@ class ItemSerializer(serializers.ModelSerializer):
 
     user_first_name = serializers.SerializerMethodField()
     user_last_name = serializers.SerializerMethodField()
+    image = serializers.ImageField(use_url=True, required=False) 
+
 
     class Meta:
         model = Item

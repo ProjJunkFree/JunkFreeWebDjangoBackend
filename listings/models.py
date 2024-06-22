@@ -18,7 +18,7 @@ class Item(models.Model):
         ('like_new', 'Like New'),
         ('used', 'Used'),
     ])
-    image = models.ImageField(upload_to='item_images', blank=True, null=True)
+    image = models.ImageField(upload_to='junk', blank=True, null=True)
     available = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     reserved = models.BooleanField(default=False)
