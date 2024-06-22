@@ -47,7 +47,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
-from django.conf import settings
 from .models import Item  
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -60,7 +59,7 @@ class ItemSerializer(serializers.ModelSerializer):
 
     user_first_name = serializers.SerializerMethodField()
     user_last_name = serializers.SerializerMethodField()
-    image = serializers.ImageField(use_url=True)  # Use ImageField to include the URL
+    image = serializers.ImageField(use_url=True, required=False)  # Use ImageField to include the URL
 
     class Meta:
         model = Item
