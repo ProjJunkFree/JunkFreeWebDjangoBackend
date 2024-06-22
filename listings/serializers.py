@@ -59,7 +59,7 @@ class ItemSerializer(serializers.ModelSerializer):
 
     user_first_name = serializers.SerializerMethodField()
     user_last_name = serializers.SerializerMethodField()
-    image = serializers.ImageField(use_url=True, required=False)  # Use ImageField to include the URL
+    image = serializers.ImageField(use_url=True)  
 
     class Meta:
         model = Item
