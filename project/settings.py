@@ -132,7 +132,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-DATABASES ['default'] = dj_database_url.parse('postgresql://junkfree_db_user:KZN6acuywaTj8FSFcEH45DMeW7w3P92r@dpg-cpqo3haj1k6c73bkemcg-a/junkfree_db')
+database_url  = os.getenv('DATABASE_URL')
+DATABASES ['default'] = dj_database_url.parse(database_url)
+
 
 
 
