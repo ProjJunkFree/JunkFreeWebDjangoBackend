@@ -213,8 +213,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
         # 'rest_framework.permissions.AllowAny'
     ],
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],  # Enable filtering 
-    'DEFAULT_SEARCH_FIELDS': ['name', 'description']  # Fields for simple search
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],  
+    # Enable filtering 
+    'DEFAULT_SEARCH_FIELDS': ['name', 'description']  
+    # Fields for simple search
 }
 
 # FOR WEB REQUEST
@@ -253,7 +255,7 @@ DJOSER = {
 
 AUTH_COOKIE = 'access'
 AUTH_COOKIE_MAX_AGE = 60 * 60 * 24
-AUTH_COOKIE_SECURE = False
+AUTH_COOKIE_SECURE = True
 AUTH_COOKIE_HTTP_ONLY = True
 AUTH_COOKIE_PATH = "/"
 AUTH_COOKIE_SAMESITE = 'None'
