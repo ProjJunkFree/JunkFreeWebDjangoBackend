@@ -133,8 +133,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-database_url  = os.getenv('DATABASE_URL')
-DATABASES ['default'] = dj_database_url.parse(database_url)
+
+# POSTGRE SQL NOT TO BE USE
+# database_url  = os.getenv('DATABASE_URL')
+# DATABASES ['default'] = dj_database_url.parse(database_url)
 
 
 
