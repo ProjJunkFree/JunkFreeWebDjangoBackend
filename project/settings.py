@@ -1,8 +1,6 @@
 from os import getenv, path
 from pathlib import Path
 import dotenv
-from django.core.management.utils import get_random_secret_key
-import dj_database_url
 from environ import Env
 
 env = Env()
