@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-
+from cloudinary.models import CloudinaryField
 class Item(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='items')
     name = models.CharField(max_length=100)
@@ -18,7 +18,7 @@ class Item(models.Model):
         ('like_new', 'Like New'),
         ('used', 'Used'),
     ])
-    image = models.ImageField(upload_to='junk', blank=True, null=True)
+    image = CloudinaryField('image', blank=True, null=True)
     available = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     reserved = models.BooleanField(default=False)
