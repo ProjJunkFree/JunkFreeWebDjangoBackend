@@ -51,6 +51,8 @@ from .models import Item
 from .serializers import ItemSerializer
 from rest_framework import status
 import cloudinary.uploader
+from django.shortcuts import get_object_or_404
+
 
 
 class ItemListCreateView(generics.ListCreateAPIView):
@@ -91,18 +93,12 @@ class UserItemList(APIView):
     #     return Response({"message": "Item deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
 
     def delete(self, request, pk):
-        try:
-            item = Item.objects.get(id=pk, user=request.user)
-        except Item.DoesNotExist:
-            return Response({"error": "Item not found or does not belong to the user"}, status=status.HTTP_404_NOT_FOUND)
-
-        # Try to delete the Cloudinary image if it exists
+        item = get_object_or_404(Item, id=pk, user=request.user)
+        
+        # Delete the Cloudinary image if it exists
         if item.image:
-            try:
-                public_id = item.image.public_id
-                cloudinary.uploader.destroy(public_id)
-            except Exception as e:
-                return Response({"error": f"Failed to delete image from Cloudinary: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
+            public_id = item.image.public_id
+            cloudinary.uploader.destroy(public_id)
+        
         item.delete()
         return Response({"message": "Item deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
